@@ -1,3 +1,5 @@
+//가장 작은 값을 선택해서 앞으로 보내는 정렬
+//
 #include<stdio.h>
 
 int main(void) {
