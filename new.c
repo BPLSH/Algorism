@@ -13,7 +13,6 @@ void Selectionsort(int* arr, int start, int end) {
 				min = j;
 			}
 		}
-		//qweqwe
 		tmp = arr[i];
 		arr[i] = arr[min];
 		arr[min] = tmp;
