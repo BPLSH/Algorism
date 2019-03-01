@@ -1,2 +1,2 @@
 ﻿  main.cpp
-LINK : fatal error LNK1561: 진입점이 정의되어야 합니다.
+  InsertionSort.vcxproj -> C:\Users\User\source\repos\Algorithms\Debug\InsertionSort.exe
