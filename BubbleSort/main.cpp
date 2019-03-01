@@ -28,7 +28,7 @@ int main(void) {
 	PrintArr(arr, len);
 
 	BubbleSort(arr, len);
-	printf("after srot : ");
+	printf("after sort : ");
 	PrintArr(arr, len);
 
 	getchar();
