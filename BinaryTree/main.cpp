@@ -123,7 +123,7 @@ int main(void) {
 	return 0;
 }*/
 //BinaryTree
-#include <stdio.h>
+/*#include <stdio.h>
 #include <stdlib.h>
 #define ElementType int
 typedef struct node {
@@ -253,6 +253,131 @@ int main(void) {
 	//printf("PreOrder : "); PreOrder(&(tree->root)); printf("\n");
 	//printf("InOrder : "); InOrder(&(tree->root)); printf("\n");
 	//printf("PostOrder : "); PostOrder(&(tree->root)); printf("\n");
+
+	getchar();
+	return 0;
+}*/
+//binarySearchTree
+#include <stdio.h>
+#include<stdlib.h>
+typedef struct node {
+	int data;
+	struct node* left;
+	struct node* right;
+}Node;
+typedef struct binarytree{
+	struct node* root;
+}BinaryTree;
+Node* CreateNode(int data) {
+	Node* newNode = (Node*)malloc(sizeof(Node));
+	newNode->data = data;
+	newNode->left = NULL;
+	newNode->right = NULL;
+
+	return newNode;
+}
+void DestroyNode(Node* node) {
+	free(node);
+}
+void InsertNode(Node* root, Node* newNode) {
+	if (newNode->data < root->data) { //left
+		if (root->left == NULL) {
+			root->left = newNode;
+		}
+		else {
+			InsertNode(root->left, newNode);
+		}
+	}
+	else {
+		if (root->right == NULL) { //right
+			root->right = newNode;
+		}
+		else {
+			InsertNode(root->right, newNode);
+		}
+	}
+}
+/*Node* BinarySearch(Node* root, int data) {
+	Node* target = root;
+	if (target == NULL) {
+		return NULL;
+	}
+	if (target->data == data) {
+		return target;
+	}
+	else {
+		if (data < target->data) { //left
+			DeleteNode(target->left, data);
+		}
+		else { //right
+			DeleteNode(target->right, data);
+		}
+	}
+
+}*/
+Node* DeleteNode(Node* root, int data) {
+	Node* target = root;
+	if (target == NULL) {
+		return NULL;
+	}
+	else if (target->data == data) {
+		return target;
+	}
+	else {
+		if (data < target->data) { //left
+			DeleteNode(target->left, data);
+		}
+		else { //right
+			DeleteNode(target->right, data);
+		}
+	}
+
+}
+void PreOrder(Node* root) {//root->left->right
+	if (root != NULL) {
+		printf("%d ", root->data);
+		PreOrder(root->left);
+		PreOrder(root->right);
+	}
+}
+void InOrder(Node* root) { //left->root->right
+	if (root != NULL) {
+		InOrder(root->left);
+		printf("%d ", root->data);
+		InOrder(root->right);
+	}
+}
+void PostOrder(Node* root) {//left->right->root
+	if (root != NULL) {
+		PostOrder(root->left);
+		PostOrder(root->right);
+		printf("%d ", root->data);
+	}
+}
+int main(void) {
+	Node* root = NULL;
+
+	root = CreateNode(47);
+	InsertNode(root, CreateNode(36));
+	InsertNode(root, CreateNode(76));
+	InsertNode(root, CreateNode(17));
+	InsertNode(root, CreateNode(54));
+	InsertNode(root, CreateNode(109));
+	InsertNode(root, CreateNode(30));
+	InsertNode(root, CreateNode(66));
+	InsertNode(root, CreateNode(151));
+	InsertNode(root, CreateNode(121));
+	InsertNode(root, CreateNode(179));
+
+//	printf("PreOrder : "); PreOrder(root); printf("\n");
+	//printf("InOrder : "); InOrder(root); printf("\n");
+	//printf("PostOrder : "); PostOrder(root); printf("\n");
+
+	printf("%d ",DeleteNode(root, 109)->data);
+
+	//printf("PreOrder : "); PreOrder(root); printf("\n");
+	//printf("InOrder : "); InOrder(root); printf("\n");
+	//printf("PostOrder : "); PostOrder(root); printf("\n");
 
 	getchar();
 	return 0;
