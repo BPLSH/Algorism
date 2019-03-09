@@ -297,6 +297,38 @@ void InsertNode(Node* root, Node* newNode) {
 		}
 	}
 }
+Node* MinValueNode(Node* root) { //매개변수로 root->right
+	if (root == NULL) {
+		return NULL;
+	}
+	if (root->left != NULL) {
+		MinValueNode(root->left);
+	}
+	else {
+		return root;
+	}
+}
+Node* DeleteNode(Node* root, int data) {
+	if (root = NULL) {
+		return NULL;
+	}
+	if (data < root->data) {
+		root->left = DeleteNode(root->left, data);
+	}
+	else if(data > root->data){
+		root->right = DeleteNode(root->right, data);
+	}
+	else {
+		if (root->left != NULL && root->right != NULL) {
+			Node * min = MinValueNode(root->right);
+			root->data = min->data;
+
+		}
+		Node* tmp = root->right;
+		free(root);
+		return tmp;
+	}
+}
 /*Node* BinarySearch(Node* root, int data) {
 	Node* target = root;
 	if (target == NULL) {
@@ -315,24 +347,41 @@ void InsertNode(Node* root, Node* newNode) {
 	}
 
 }*/
-Node* DeleteNode(Node* root, int data) {
-	Node* target = root;
-	if (target == NULL) {
-		return NULL;
-	}
-	else if (target->data == data) {
-		return target;
-	}
-	else {
-		if (data < target->data) { //left
-			DeleteNode(target->left, data);
-		}
-		else { //right
-			DeleteNode(target->right, data);
-		}
+
+/*Node* DeleteNode(Node* root, int data) {
+	if (root == NULL)
+	{
+		return root;
 	}
 
-}
+	if (data < root->data) {
+		root->left = DeleteNode(root->left, data);
+	}
+	else if (data > root->data) {
+		root->right = DeleteNode(root->right, data);
+	}
+	else
+	{
+		if (root->left == NULL) //오른쪽만 있는경우 //둘다 없는 경우
+		{
+			Node* temp = root->right;
+			free(root);
+			return temp;
+		}
+		if (root->right == NULL) //왼쪽만 있는 경우 
+		{
+			Node* temp = root->left;
+			free(root);
+			return temp;
+		}
+
+		//Node* temp = MinValueNode(root->right); //둘다 있는경우
+
+		//root->data = temp->data;
+		//root->right = DeleteNode(root->right, temp->data);
+	}
+	return root;
+}*/
 void PreOrder(Node* root) {//root->left->right
 	if (root != NULL) {
 		printf("%d ", root->data);
@@ -369,15 +418,15 @@ int main(void) {
 	InsertNode(root, CreateNode(121));
 	InsertNode(root, CreateNode(179));
 
-//	printf("PreOrder : "); PreOrder(root); printf("\n");
-	//printf("InOrder : "); InOrder(root); printf("\n");
-	//printf("PostOrder : "); PostOrder(root); printf("\n");
+	printf("PreOrder : "); PreOrder(root); printf("\n");
+	printf("InOrder : "); InOrder(root); printf("\n");
+	printf("PostOrder : "); PostOrder(root); printf("\n");
 
-	printf("%d ",DeleteNode(root, 109)->data);
+	printf("%d\n",DeleteNode(root, 109)->data);
 
-	//printf("PreOrder : "); PreOrder(root); printf("\n");
-	//printf("InOrder : "); InOrder(root); printf("\n");
-	//printf("PostOrder : "); PostOrder(root); printf("\n");
+	printf("PreOrder : "); PreOrder(root); printf("\n");
+	printf("InOrder : "); InOrder(root); printf("\n");
+	printf("PostOrder : "); PostOrder(root); printf("\n");
 
 	getchar();
 	return 0;
